@@ -206,10 +206,16 @@ function initSorteo() {
     let isSorteoRunning = false;
 
     const cargarBtn = document.getElementById('cargarParticipantesBtn');
+    const mezclarBtn = document.getElementById('mezclarBtn');
     const numGanadoresInput = document.getElementById('numGanadores');
     const premiosContainer = document.getElementById('premiosContainer');
     const iniciarBtn = document.getElementById('iniciarSorteoBtn');
     const configPremiosDiv = document.getElementById('configPremios');
+    const participantesList = document.getElementById('participantesList');
+
+    const renderParticipantes = () => {
+        participantesList.innerHTML = participantes.map(p => `<span class="tag">${p.nombre}</span>`).join(' ');
+    };
 
     numGanadoresInput.addEventListener('input', () => {
         const num = parseInt(numGanadoresInput.value) || 1;
@@ -235,8 +241,11 @@ function initSorteo() {
                 if (response.success) {
                     participantes = response.data;
                     document.getElementById('participantesCount').textContent = participantes.length;
-                    document.getElementById('participantesList').innerHTML = participantes.map(p => `<span class="tag">${p.nombre}</span>`).join(' ');
-                    configPremiosDiv.style.display = participantes.length > 0 ? 'block' : 'none';
+                    renderParticipantes();
+                    
+                    const hasParticipants = participantes.length > 0;
+                    configPremiosDiv.style.display = hasParticipants ? 'block' : 'none';
+                    mezclarBtn.style.display = hasParticipants ? 'block' : 'none';
                     
                     // Resetear el sorteo si se recargan los participantes
                     currentWinnerIndex = 0;
@@ -246,6 +255,15 @@ function initSorteo() {
                     document.querySelector('#ganadoresSorteoTable tbody').innerHTML = '';
                 }
             });
+    });
+
+    mezclarBtn.addEventListener('click', () => {
+        // Algoritmo Fisher-Yates para mezclar el array
+        for (let i = participantes.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [participantes[i], participantes[j]] = [participantes[j], participantes[i]];
+        }
+        renderParticipantes();
     });
 
     iniciarBtn.addEventListener('click', () => {
@@ -360,7 +378,7 @@ function initSorteo() {
             document.getElementById('participantesList').innerHTML = participantes.map(p => `<span class="tag">${p.nombre}</span>`).join(' ');
 
             currentWinnerIndex++;
-        }, 6500); // Aumentar el tiempo para dar espacio a la animación
+        }, 2500); // Reducir el tiempo para que sea mas rapido
     }
 
     function launchConfetti() {

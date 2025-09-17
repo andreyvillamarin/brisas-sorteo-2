@@ -24,7 +24,10 @@
                 <input type="date" id="sorteoFechaFin" style="width: 50%;">
             </div>
         </div>
-        <button id="cargarParticipantesBtn">Cargar Participantes</button>
+        <div class="form-group" style="display: flex; gap: 10px;">
+            <button id="cargarParticipantesBtn" style="flex: 1;">Cargar Participantes</button>
+            <button id="mezclarBtn" class="btn-secondary" style="flex: 1; display: none;">Mezclar Participantes</button>
+        </div>
         <hr>
         <div id="configPremios" style="display:none;">
             <div class="form-group">

@@ -339,7 +339,7 @@ table .btn, table a.btn-primary, table a.btn-secondary {
 }
 
 .reel {
-    transition: transform 6s cubic-bezier(0.3, 1, 0.4, 1); /* Animación más suave y larga */
+    transition: transform 5s cubic-bezier(0.25, 1, 0.5, 1); /* Animación más dramática */
 }
 
 .reel-item {
