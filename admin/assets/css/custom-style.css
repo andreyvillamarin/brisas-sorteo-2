@@ -1,0 +1,80 @@
+/* --- Botones Mejorados --- */
+.btn-primary, .btn-secondary, .btn-danger {
+    color: white !important;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.1s;
+    text-align: center;
+}
+
+.btn-primary:hover, .btn-secondary:hover, .btn-danger:hover {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d !important;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268 !important;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Contenedor para los botones del formulario */
+.form-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px; /* Espacio entre botones */
+    margin-top: 20px;
+    align-items: center;
+}
+
+/* --- Barra Superior --- */
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+#sidebar-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #333;
+}
+
+.user-info span {
+    font-weight: 500;
+}
+
+/* Estilos para celdas de acciones en tablas */
+.actions-cell {
+    display: flex;
+    gap: 10px;
+}

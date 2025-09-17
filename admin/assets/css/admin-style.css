@@ -1,0 +1,498 @@
+/* Importa una fuente moderna */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* --- Reset y Normalizacion --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Variables de color */
+:root {
+    --primary-color: #aa182c;
+    --primary-dark: #861323;
+    --sidebar-bg: #1e1e2d;
+    --sidebar-text: #a2a3b7;
+    --sidebar-text-hover: #ffffff;
+    --content-bg: #f4f4f9;
+    --card-bg: #ffffff;
+    --text-color: #333;
+    --border-color: #e0e0e0;
+}
+
+/* Estilos Generales */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: var(--content-bg);
+    color: var(--text-color);
+}
+
+.admin-wrapper {
+    display: flex;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s ease;
+    overflow-x: hidden;
+}
+.sidebar.collapsed {
+    width: 80px;
+}
+.sidebar-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+.sidebar-header h2 {
+    color: white;
+    margin: 0;
+    font-size: 1.5em;
+    white-space: nowrap;
+}
+.sidebar.collapsed .sidebar-header h2 span:last-child { display: none; }
+.sidebar-header .sidebar-logo {
+    max-width: 150px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+.sidebar-menu {
+    list-style: none;
+    padding: 20px 0;
+    margin: 0;
+}
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+    white-space: nowrap;
+}
+.sidebar-menu li a:hover, .sidebar-menu li.active a {
+    background-color: var(--primary-color);
+    color: var(--sidebar-text-hover);
+}
+.sidebar-menu li a .icon {
+    margin-right: 15px;
+    font-size: 1.2em;
+}
+.sidebar.collapsed .sidebar-menu li a .text {
+    display: none;
+}
+.sidebar.collapsed .sidebar-menu li a {
+    justify-content: center;
+}
+.sidebar.collapsed .sidebar-menu li a .icon {
+    margin-right: 0;
+}
+.sidebar-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/* --- Contenido Principal --- */
+.main-content-wrapper {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    transition: margin-left 0.3s ease, width 0.3s ease;
+    padding: 20px;
+}
+.main-content-wrapper.expanded {
+    margin-left: 80px;
+    width: calc(100% - 80px);
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.header h1 {
+    margin: 0;
+}
+
+#sidebar-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* --- Tarjetas y Contenedores --- */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 15px;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+/* --- Tablas --- */
+.table-responsive {
+    overflow-x: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* --- Formularios --- */
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1em;
+}
+textarea { resize: vertical; }
+
+/* --- Botones --- */
+button, .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+button:hover, .btn:hover {
+    background-color: var(--primary-dark);
+}
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-danger { background-color: #dc3545; }
+.btn-danger:hover { background-color: #c82333; }
+
+/* Botones dentro de tablas mas pequenos */
+table .btn, table a.btn-primary, table a.btn-secondary {
+    padding: 5px 10px;
+    font-size: 0.85em;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.cta-button {
+    padding: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    width: 100%;
+}
+
+/* --- Utilidades de Formulario --- */
+.form-row-halves {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.form-row-halves > * {
+    flex: 1;
+    min-width: 0; /* Prevents overflow in flex items */
+}
+
+/* --- Sorteo --- */
+.sorteo-container {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 20px;
+}
+
+.sorteo-setup {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Adds space between all form elements */
+}
+.sorteo-setup .form-group input {
+    max-width: 100%;
+}
+.participantes-list {
+    max-height: 200px;
+    overflow-y: auto;
+    background: #f9f9f9;
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    border-radius: 5px;
+}
+.tag {
+    display: inline-block;
+    background: #e0e0e0;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin: 3px;
+    font-size: 0.9em;
+}
+
+/* Popup Animacion Sorteo */
+.popup-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+.popup-overlay.show { opacity: 1; visibility: visible; }
+.popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+}
+.winner-animation-container {
+    height: 150px; /* Altura fija para el contenedor del reel */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid var(--primary-dark);
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(255,255,255,0) 20%, rgba(255,255,255,0) 80%, rgba(0,0,0,0.1) 100%);
+    position: relative;
+}
+
+.winner-animation-container::before, .winner-animation-container::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 40px; /* Sombra superior e inferior */
+    z-index: 2;
+}
+
+.winner-animation-container::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--card-bg) 0%, rgba(255,255,255,0) 100%);
+}
+
+.winner-animation-container::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--card-bg) 0%, rgba(255,255,255,0) 100%);
+}
+
+.reel {
+    transition: transform 6s cubic-bezier(0.3, 1, 0.4, 1); /* Animación más suave y larga */
+}
+
+.reel-item {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: var(--primary-color);
+    height: 150px; /* Debe coincidir con la altura del contenedor */
+    line-height: 150px; /* Centrado vertical */
+    text-align: center;
+}
+
+.winner-title { font-size: 2em; margin: 0; color: #555; }
+.winner-name { 
+    font-size: 3.5em; 
+    font-weight: 700; 
+    color: var(--primary-color); 
+    margin: 10px 0; 
+    animation: pop-in 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.winner-prize { font-size: 1.5em; margin: 0; }
+
+/* Mensajes */
+.success-msg { color: green; margin-top: 10px; }
+.error-msg { color: red; margin-top: 10px; }
+
+/* Responsive */
+@media (max-width: 992px) {
+    .sorteo-container { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+    .main-content-wrapper, .main-content-wrapper.expanded {
+        margin-left: 0;
+        width: 100%;
+    }
+    .sidebar { left: -250px; }
+    .sidebar.collapsed { left: 0; width: 250px; } /* Simplificado para movil */
+    .header { flex-direction: column; align-items: flex-start; }
+}
+
+/* --- Estilos para la página de Login --- */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--content-bg);
+}
+.login-container {
+    padding: 40px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+.login-container h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+.login-container button {
+    width: 100%;
+}
+/* --- ESTILOS MODERNOS PARA FILTROS Y BUSCADORES --- */
+
+/* Contenedor para los grupos de filtros */
+.filter-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap; /* Para que se adapte en pantallas pequenas */
+}
+
+/* Grupo de input con icono */
+.input-group-icon {
+    position: relative;
+}
+
+.input-group-icon .icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 0.9em;
+}
+
+/* Ajuste general para todos los inputs y selects del panel */
+.card input[type="text"],
+.card input[type="date"],
+.card input[type="number"],
+.card select {
+    background-color: #f9f9f9;
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* Bordes mas redondeados */
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+    font-size: 0.95em;
+}
+
+/* Estilo para inputs con icono a la izquierda */
+.input-group-icon input {
+    padding-left: 40px !important;
+}
+
+/* Efecto de foco moderno */
+.card input[type="text"]:focus,
+.card input[type="date"]:focus,
+.card input[type="number"]:focus,
+.card select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: var(--card-bg);
+    box-shadow: 0 0 0 3px rgba(170, 24, 44, 0.15); /* Sombra de foco sutil */
+}
+
+/* --- Animaciones --- */
+@keyframes pop-in {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.popup-content.celebrate {
+    position: relative;
+    overflow: hidden;
+}
+
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1002;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #f00;
+    opacity: 0.7;
+    animation: confetti-fall 3s linear forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-100px) rotateZ(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotateZ(720deg);
+        opacity: 0;
+    }
+}
