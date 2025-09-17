@@ -318,14 +318,24 @@ function initSorteo() {
         const winner = participantes[winnerIndex];
 
         // 2. Construir el reel
-        // Desordena una copia de los participantes para el reel
-        const shuffledParticipantes = [...participantes].sort(() => 0.5 - Math.random());
-        
-        // Asegurarse de que el ganador no se repita si ya está en la lista de relleno
-        const reelItems = shuffledParticipantes.filter(p => p.cedula !== winner.cedula).slice(0, 30);
+        // Para un efecto de giro más largo, creamos una lista más grande de nombres.
+        let reelItems = [];
+        const otherParticipants = participantes.filter(p => p.cedula !== winner.cedula);
 
-        // Insertar el ganador en una posición predecible (ej. el antepenúltimo)
-        const winnerPosition = reelItems.length - 3;
+        if (otherParticipants.length > 0) {
+            // Añadimos múltiples copias desordenadas de los otros participantes para alargar el reel.
+            for (let i = 0; i < 6; i++) { 
+                reelItems.push(...[...otherParticipants].sort(() => 0.5 - Math.random()));
+            }
+        }
+        
+        // Si hay muy pocos participantes, o solo uno, llenamos el espacio con el ganador.
+        if (reelItems.length === 0 && winner) {
+            reelItems = Array(50).fill(winner);
+        }
+
+        // Insertar el ganador real en una posición predecible, cerca del final, para que el reel se detenga en él.
+        const winnerPosition = Math.max(20, reelItems.length - 5);
         reelItems.splice(winnerPosition, 0, winner);
 
         // Llenar el reel con los nombres
@@ -342,7 +352,8 @@ function initSorteo() {
         reel.style.transform = 'translateY(0)'; 
         
         setTimeout(() => {
-            // Mover el reel a la posición del ganador
+            // Mover el reel a la posición del ganador.
+            // La larga lista de `reelItems` y la duración de la transición en CSS se encargan del efecto.
             const reelItemHeight = 150; // Debe coincidir con el CSS
             const targetY = - (winnerPosition * reelItemHeight);
             reel.style.transform = `translateY(${targetY}px)`;
@@ -351,8 +362,7 @@ function initSorteo() {
 
         // Revelar el ganador después de que la animación termine
         setTimeout(() => {
-            const winner = participantes[winnerIndex];
-
+            // El `winner` ya fue determinado al inicio.
             const formData = new FormData();
             formData.append('action', 'guardar_ganador');
             formData.append('nombre', winner.nombre);
@@ -378,7 +388,7 @@ function initSorteo() {
             document.getElementById('participantesList').innerHTML = participantes.map(p => `<span class="tag">${p.nombre}</span>`).join(' ');
 
             currentWinnerIndex++;
-        }, 2500); // Reducir el tiempo para que sea mas rapido
+        }, 7500); // Sincronizado con la animación de 7.5s en CSS.
     }
 
     function launchConfetti() {
